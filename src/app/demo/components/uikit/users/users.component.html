@@ -1,0 +1,226 @@
+<!-- users.component.html -->
+<div class="users">
+    <h2>Table d'utilisateurs</h2>
+
+
+
+
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <div class="my-2">
+                <button pButton pRipple label="Imprimer" icon="pi pi-print" class="p-button-warning mr-2" (click)="voirVersionImpression()"></button>
+                <button pButton pRipple label="Télécharger Excel" icon="pi pi-file-excel" class="p-button-success" (click)="telechargerListeExcel()"></button>
+            </div>
+        </ng-template>
+        <div class="my-2">
+            <button pButton pRipple label="Ajouter Utilisateur" class="add-user-button" icon="pi pi-plus" (click)="showNewUserDialog = true"></button>
+           
+        </div>
+        <div class="my-2">
+            <button pButton pRipple label="listes d'attentes" class="add-user-button" icon="pi pi-plus"  [routerLink]="['/uikit/usersattente']"></button>
+        </div>
+
+    </p-toolbar>
+
+
+
+
+    <p-dialog header="Ajouter un nouvel utilisateur" [(visible)]="showNewUserDialog" [modal]="true" [responsive]="true" class="custom-dialog-size">
+        <form [formGroup]="newUserForm" (ngSubmit)="ajouterNouvelUtilisateur()" class="add-user-form">
+            <!-- CIN -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('cin')?.invalid && newUserForm.get('cin')?.touched}">
+                <label for="cin">CIN</label>
+                <input type="text" id="cin" formControlName="cin" class="form-control" />
+                <div *ngIf="newUserForm.get('cin')?.invalid && newUserForm.get('cin')?.touched" class="text-danger">
+                    CIN est requis.
+                </div>
+            </div>
+    
+            <!-- Nom de famille -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('fname')?.invalid && newUserForm.get('fname')?.touched}">
+                <label for="nom">Nom de famille *</label>
+                <input type="text" id="nom" formControlName="fname" class="form-control">
+                <div *ngIf="newUserForm.get('fname')?.invalid && newUserForm.get('fname')?.touched" class="text-danger">
+                    Nom de famille est requis.
+                </div>
+            </div>
+    
+            <!-- Prénom -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('lname')?.invalid && newUserForm.get('lname')?.touched}">
+                <label for="prenom">Prenom *</label>
+                <input type="text" id="prenom" formControlName="lname" class="form-control">
+                <div *ngIf="newUserForm.get('lname')?.invalid && newUserForm.get('lname')?.touched" class="text-danger">
+                    Prenom est requis.
+                </div>
+            </div>
+    
+            <!-- Numéro de portable -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('nbr_tel')?.invalid && newUserForm.get('nbr_tel')?.touched}">
+                <label for="nbr_tel">Numéro de portable *</label>
+                <input type="text" id="nbr_tel" formControlName="nbr_tel" class="form-control">
+                <div *ngIf="newUserForm.get('nbr_tel')?.invalid && newUserForm.get('nbr_tel')?.touched" class="text-danger">
+                    <div *ngIf="newUserForm.get('nbr_tel')?.errors?.['required']">Numéro de portable est requis.</div>
+                    <div *ngIf="newUserForm.get('nbr_tel')?.errors?.['pattern']">Numéro de portable doit être numérique.</div>
+                </div>
+            </div>
+    
+            <!-- Email -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched}">
+                <label for="email">Email *</label>
+                <input type="email" id="email" formControlName="email" class="form-control">
+                <div *ngIf="newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched" class="text-danger">
+                    <div *ngIf="newUserForm.get('email')?.errors?.['required']">Email est requis.</div>
+                    <div *ngIf="newUserForm.get('email')?.errors?.['email']">Email n'est pas valide.</div>
+                </div>
+            </div>
+    
+            <!-- Role -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('role_id')?.invalid && newUserForm.get('role_id')?.touched}">
+                <label for="role">Role *</label>
+                <select formControlName="role_id" name="role" class="form-control">
+                    <option *ngFor="let role of roles" [value]="role.id.toString()">{{ role.nom }}</option>
+                </select>
+                <div *ngIf="newUserForm.get('role_id')?.invalid && newUserForm.get('role_id')?.touched" class="text-danger">
+                    Rôle est requis.
+                </div>
+            </div>
+    
+            <!-- Department -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('department_id')?.invalid && newUserForm.get('department_id')?.touched}">
+                <label for="department">Department *</label>
+                <select formControlName="department_id" name="department" class="form-control">
+                    <option *ngFor="let department of departments" [value]="department.id.toString()">{{ department.nom }}</option>
+                </select>
+            </div>
+    
+            <!-- Mot de passe -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched}">
+                <label for="password">Mot de passe *</label><br>
+                <input type="password" id="password" formControlName="password" class="form-control">
+                <div *ngIf="newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched" class="text-danger">
+                    <div *ngIf="newUserForm.get('password')?.errors?.['required']">Mot de passe est requis.</div>
+                    <div *ngIf="newUserForm.get('password')?.errors?.['minlength']">Mot de passe doit contenir au moins 6 caractères.</div>
+                </div>
+            </div>
+    
+            <!-- Confirmer le mot de passe -->
+            <div class="form-group" [ngClass]="{'has-error': newUserForm.get('cpassword')?.invalid && newUserForm.get('cpassword')?.touched}">
+                <label for="confirmPassword">Confirmer le mot de passe *</label>
+                <input type="password" id="confirmPassword" formControlName="cpassword" class="form-control">
+                <div *ngIf="newUserForm.get('cpassword')?.invalid && newUserForm.get('cpassword')?.touched" class="text-danger">
+                    <div *ngIf="newUserForm.get('cpassword')?.errors?.['required']">Confirmer le mot de passe est requis.</div>
+                    <div *ngIf="newUserForm.errors?.['mismatch']">Les mots de passe ne correspondent pas.</div>
+                </div>
+            </div>
+    
+            <!-- Boutons -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Enregistrer</button>
+                <button type="button" (click)="showNewUserDialog = false" class="btn btn-danger">Annuler</button>
+            </div>
+        </form>
+    </p-dialog>
+    
+    <style>
+        .text-danger {
+            color: red;
+        }
+    
+        .has-error input,
+        .has-error select {
+            border-color: red;
+        }
+    </style>
+    
+
+    <br>
+
+    <div class="table-container">
+        <p-table [value]="users" [paginator]="true" [rows]="10" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>CIN</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <!-- <th>Department</th> -->
+                    <th>Email</th>
+                    <th>Numéro de téléphone</th>
+                    <th>Rôle</th>
+                    <th>Actions</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+             
+                <tr *ngIf="user.status === 'oui'">
+                    <td>{{ user.cin }}</td>
+                    <td>{{ user.fname }}</td>
+                    <td>{{ user.lname }}</td>
+                      <!-- <div *ngFor="let department of departments" >
+                        <td *ngIf="department.id==user.department_id">{{department.nom}}</td></div> -->
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.nbr_tel }}</td>
+                    <div *ngFor="let role of roles" >
+                    <td *ngIf="role.id==user.role_id">{{role.nom}}</td></div>
+                  
+                    <td> 
+                        <div class="icone">
+                        <!-- Boutons d'action (voir, éditer, supprimer) -->
+                        <!-- <button (click)="voirDetails(user)"><i class="fas fa-eye"></i></button> -->
+                        <button (click)="editerInformations(user)"><i class="fas fa-edit"></i></button>
+                        <button (click)="supprimerUtilisateur(user.id)"><i class="fas fa-trash-alt"></i></button>
+
+                    </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+  </div>
+
+
+  <p-dialog header="Modifier les informations de l'utilisateur" [(visible)]="showEditUserDialog" [modal]="true" [responsive]="true" [style]="{ width: '400px' }">
+    <form [formGroup]="editUserForm" (ngSubmit)="modifierUtilisateur()" class="edit-user-form">
+        <div class="form-group">
+            <label for="cin">CIN</label>
+            <input type="text" id="cin" formControlName="cin" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" id="nom" formControlName="fname" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prénom</label>
+            <input type="text" id="prenom" formControlName="lname" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" formControlName="email" class="form-control" />
+        </div>
+        <label for="email">Role *</label>
+        <select  formControlName="role_id"  name="role">
+            <option *ngFor="let role of roles" >{{role.nom}}</option>
+          </select>                
+
+  
+    <label for="email">Department *</label>
+        <select  formControlName="department_id"  name="department">
+            <option *ngFor="let department of departments" >{{department.nom}}</option>
+          </select>                
+   
+        <div class="form-group">
+            <label for="nbr_tel">Numéro de téléphone</label>
+            <input type="text" id="nbr_tel" formControlName="nbr_tel" class="form-control" />
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <button type="button" (click)="showEditUserDialog = false" class="btn btn-danger">Annuler</button>
+        </div>
+    </form>
+</p-dialog> 
+
+
+
+
+
+
+
+</div>

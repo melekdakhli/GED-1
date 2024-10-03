@@ -1,0 +1,60 @@
+<div class="department-interface card">
+    <h5>Liste des départements</h5>
+    <p-table [value]="departments" [paginator]="true" [rows]="pageSize" [totalRecords]="totalDepartments" [lazy]="true" (onLazyLoad)="loadDepartments($event)" [loading]="loading" responsiveLayout="scroll">
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-between flex-column sm:flex-row">
+                <button pButton type="button" label="Nouveau département" icon="pi pi-plus" (click)="showNewDepartmentDialog = true"></button>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Rechercher">
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nom du département</th>
+                <th class="actions-column">Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-department>
+            <tr>
+                <td>{{ department.nom }}</td>
+                <td>
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="onEditDepartment(department)"></button>
+                    <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="onDeleteDepartment(department)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <!-- Popup d'édition -->
+    <p-dialog header="Modifier le département" [(visible)]="displayEditDialog" [modal]="true" class="custom-dialog-size">
+        <form [formGroup]="departmentForm">
+            <div class="form-group">
+                <label for="nom">Nom du Département:</label>
+                <input type="text" formControlName="nom" id="nom" class="form-control"/>
+               
+            </div>
+            <div class="form-group">
+                <button type="button" (click)="saveDepartment()" class="btn btn-success">Enregistrer</button>
+                <button type="button" (click)="displayEditDialog = false" class="btn btn-danger">Annuler</button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <!-- Popup d'ajout -->
+    <p-dialog header="Ajouter un département" [(visible)]="showNewDepartmentDialog" [modal]="true" [responsive]="true" class="custom-dialog-size">
+        <div class="department-add">
+            <form [formGroup]="DepartmentForm" (ngSubmit)="onSaveDepartment()">
+                <div class="form-group">
+                    <label for="departmentName">Nom du département</label>
+                    <input type="text" class="form-control" id="nameDepartment" formControlName="nom" required>
+                    
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </p-dialog>
+</div>

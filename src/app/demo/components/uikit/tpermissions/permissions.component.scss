@@ -1,0 +1,175 @@
+:root {
+    --background-color: #fff; /* Pour thème clair */
+    --text-color: #000;
+    --border-color: #ddd;
+    --alternate-row-color: #f9f9f9;
+    --header-background-color: #f2f2f2;
+  }
+
+  .dark-theme {
+    --background-color: #333; /* Pour thème sombre */
+    --text-color: #fff;
+    --border-color: #555;
+    --alternate-row-color: #2e2e2e;
+    --header-background-color: #444;
+  }
+
+  .permissions {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid var(--border-color);
+    padding: 8px;
+  }
+
+  th {
+    background-color: var(--header-background-color);
+  }
+
+  tr:nth-child(even) {
+    background-color: var(--alternate-row-color);
+  }
+
+  /* Assurez-vous d'ajuster les styles des composants PrimeNG en conséquence */
+  .p-dropdown .p-dropdown-label,
+  .p-dropdown .p-dropdown-panel,
+  .p-dropdown:not(.p-disabled):not(.p-dropdown-clearable):not(.p-dropdown-open):hover {
+    color: var(--text-color);
+    background-color: var(--background-color);
+  }
+
+  .p-dropdown-panel {
+    border-color: var(--border-color);
+  }
+
+  /* Styles pour les boutons pour correspondre au thème sélectionné */
+  button {
+    background-color: var(--header-background-color);
+    color: var(--text-color);
+  }
+
+  button:hover {
+    background-color: var(--border-color);
+  }
+
+  /* Pagination */
+  .p-paginator .p-paginator-pages .p-paginator-page {
+    color: var(--text-color);
+  }
+
+
+
+
+  /* Dialog styles */
+.p-dialog .p-dialog-content {
+    padding: 20px; // Augmente le padding pour plus d'espace autour du contenu
+    font-size: 14px; // Taille de police pour le texte à l'intérieur du dialogue
+  }
+
+  .p-dialog .form-group {
+    margin-bottom: 15px; // Espace entre les champs du formulaire
+    label {
+      display: block; // Assure que le label est au-dessus de l'input
+      margin-bottom: 5px; // Espace entre le label et l'input
+      font-weight: bold; // Rend le texte des labels en gras
+    }
+    input {
+      width: 100%; // Assure que l'input prend toute la largeur disponible
+      padding: 8px; // Padding à l'intérieur des inputs pour une meilleure lisibilité
+      border: 1px solid #ccc; // Bordure subtile pour les inputs
+      border-radius: 4px; // Arrondit les coins des champs de texte
+    }
+  }
+
+  /* Footer styles for dialog */
+ /* Custom Dialog Styles */
+ .custom-dialog-size {
+    width: 50% !important; /* Taille de la boîte de dialogue */
+    min-width: 300px !important; /* Largeur minimale pour la responsivité */
+  }
+
+  /* Styles pour les formulaires à l'intérieur des dialogues */
+  .permissions-form {
+    .form-group {
+      margin-bottom: 1rem; /* Espace entre les contrôles du formulaire */
+
+      label {
+        display: block; /* Affichage du label au-dessus de l'input */
+        margin-bottom: 0.5rem; /* Espace entre le label et l'input */
+      }
+
+      .p-dropdown, .p-checkbox {
+        width: 100%; /* Largeur complète pour les dropdown et checkbox */
+        margin-bottom: 0.5rem; /* Espace après les dropdown et checkbox */
+      }
+    }
+
+    /* Styles pour les boutons du formulaire */
+    .form-buttons {
+      display: flex;
+      justify-content: flex-end; /* Boutons alignés à droite */
+
+      button {
+        margin-left: 0.5rem; /* Espace entre les boutons */
+      }
+    }
+  }
+
+  /* Styles supplémentaires pour la cohérence de l'UI */
+  .p-dialog .p-dialog-content {
+    font-size: 1rem; /* Taille de police standard */
+  }
+
+  .p-button {
+    padding: 0.5rem 1rem; /* Padding standard pour les boutons */
+  }
+
+
+  /* Icon Style Adjustments for Action Buttons */
+  .icone button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0 5px;
+    cursor: pointer;
+
+    &:hover {
+      background: none;
+      opacity: 0.8;
+    }
+
+    i {
+      font-size: 20px;
+      margin-right: 5px;
+      border: none;
+    }
+  }
+
+
+
+
+  ::ng-deep .custom-dialog-size {
+    width: 30% !important;
+    min-width: 200px !important;
+  }
+  select {
+    width: 100%; /* Prend la largeur totale du conteneur parent */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 14px;
+  }
+  
+  /* Style pour les options de la liste déroulante */
+  option {
+    padding: 5px;
+    font-size: 14px;
+  }

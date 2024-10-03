@@ -1,0 +1,106 @@
+<div class="permissions">
+    <h2>Gestion des Permissions</h2>
+    <button pButton type="button" label="Nouveau" icon="pi pi-plus" class="mr-2" (click)="addDialogVisible=true"></button>
+
+    <p-table [value]="permissions" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Role</th>
+                <th>Créer</th>
+                <th>Lire</th>
+                <th>Modifier</th>
+                <th>Supprimer</th>
+                <th>telecharger</th>
+                <th >Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-permission>
+            <tr>
+              <ngclass *ngFor="let role of roles" >
+                <td *ngIf="role.id==permission.role_id">{{role.nom}}</td></ngclass>
+                <td>{{ permission.create  }}</td>
+                <td>{{ permission.show  }}</td>
+                <td>{{ permission.modifier  }}</td>
+                <td>{{ permission.delete }}</td>
+                <td>{{ permission.telech  }}</td>
+
+                <td>
+                    <button pButton type="button" icon="pi pi-pencil" label="Modifier" class="mr-2" (click)="showEditDialog(permission)"></button>
+                    <button pButton type="button" icon="pi pi-trash" label="Supprimer" (click)="confirmDelete(permission)"></button>
+
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <!-- Dialog for Editing Permissions -->
+    <p-dialog header="Modifier les Permissions" [(visible)]="displayDialog" [modal]="true" [responsive]="true" styleClass="custom-dialog-size">
+        <form [formGroup]="permissionsForm" *ngIf="selectedPermissions" class="permissions-form">
+       
+          <label for="email">Role *</label>
+          <select  formControlName="role_id"  name="role">
+              <option *ngFor="let role of roles" >{{role.nom}}</option>
+            </select>
+            <div class="form-group">
+                <label for="createPermission">Créer:</label>
+                <p-checkbox binary="true" formControlName="create"></p-checkbox>
+            </div>
+            <div class="form-group">
+                <label for="readPermission">Lire:</label>
+                <p-checkbox binary="true" formControlName="show"></p-checkbox>
+            </div>
+            <div class="form-group">
+                <label for="deletePermission"> Supprimer:</label>
+                <p-checkbox binary="true" formControlName="delete"></p-checkbox>
+            </div>
+            <div class="form-group">
+                <label for="deletePermission">Modifier:</label>
+                <p-checkbox binary="true" formControlName="modifier"></p-checkbox>
+            </div>
+            <div class="form-group">
+              <label for="telechargement">telecharger:</label>
+              <p-checkbox binary="true" formControlName="telech"></p-checkbox>
+          </div>
+            <div class="form-group">
+                <button type="button" pButton label="Enregistrer" icon="pi pi-check" class="btn btn-success" (click)="saveRolePermissions()"></button>
+                <button type="button" pButton label="Annuler" icon="pi pi-times" class="btn btn-danger" (click)="displayDialog=false"></button>
+            </div>
+        </form>
+    </p-dialog>
+
+   <!-- Dialog for Adding New Permissions -->
+<p-dialog header="Ajouter Nouvelles Permissions" [(visible)]="addDialogVisible" [modal]="true" [responsive]="true">
+    <form [formGroup]="newPermissionForm" class="permissions-form">
+      <label for="email">Role *</label>
+      <select  formControlName="role_id"  name="role">
+          <option *ngFor="let role of roles" [value]="role.id.toString()">{{role.nom}}</option>
+        </select>  
+      <div class="form-group">
+        <label>Créer:</label>
+        <p-checkbox binary="true" formControlName="create"></p-checkbox>
+      </div>
+      <div class="form-group">
+        <label>Lire:</label>
+        <p-checkbox binary="true" formControlName="show"></p-checkbox>
+      </div>
+      <div class="form-group">
+        <label>Modifier:</label>
+        <p-checkbox binary="true" formControlName="modifier"></p-checkbox>
+      </div>
+      <div class="form-group">
+        <label>Supprimer:</label>
+        <p-checkbox binary="true" formControlName="delete"></p-checkbox>
+      </div>
+      <div class="form-group">
+        <label>telecharger:</label>
+        <p-checkbox binary="true" formControlName="telech"></p-checkbox>
+      </div>
+      <div class="form-group">
+       
+        <button type="button"   class="btn btn-success" pButton label="Enregistrer" (click)="saveNewPermissions()"></button>
+        <button type="button" pButton label="Annuler" (click)="addDialogVisible=false"></button>
+      </div>
+    </form>
+  </p-dialog>
+
+</div>

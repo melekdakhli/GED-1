@@ -1,0 +1,72 @@
+
+
+<div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+      <img src="assets/layout/images/asm1.jpg" alt="Sakai logo" class="mb-5 w-10rem flex-shrink-0">
+      <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, orange 10%, black 30%);">
+        <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px">
+
+          <div class="text-center mb-5">
+            <span class="text-600 font-medium">Create an Account</span>
+          </div>
+          <form [formGroup]="form" (submit)="Submit()">
+            <div>
+              <label for="fname" class="block text-900 text-xl font-medium mb-2">Prénom</label>
+              <input id="fname" formControlName="fname" type="text" placeholder="Prénom" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+              <div *ngIf="form.get('fname')?.invalid && form.get('fname')?.touched" class="text-danger">
+                First Name is required.
+              </div>
+          
+              <label for="lname" class="block text-900 text-xl font-medium mb-2">Nom</label>
+              <input id="lname" formControlName="lname" type="text" placeholder="Nom" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+              <div *ngIf="form.get('lname')?.invalid && form.get('lname')?.touched" class="text-danger">
+                Last Name is required.
+              </div>
+          
+              <label for="cin" class="block text-900 text-xl font-medium mb-2">CIN</label>
+              <input id="cin" formControlName="cin" type="text" placeholder="CIN" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+              <div *ngIf="form.get('cin')?.invalid && form.get('cin')?.touched" class="text-danger">
+                CIN is required.
+              </div>
+          
+              <label for="nbr_tel" class="block text-900 text-xl font-medium mb-2"> Numéro de téléphone</label>
+              <input id="nbr_tel" formControlName="nbr_tel" type="text" placeholder="Numéro de téléphone" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+              <div *ngIf="form.get('nbr_tel')?.invalid && form.get('nbr_tel')?.touched" class="text-danger">
+                <div *ngIf="form.get('nbr_tel')?.errors?.['required']">Phone Number is required.</div>
+                <div *ngIf="form.get('nbr_tel')?.errors?.['pattern']">Phone Number must be numeric.</div>
+              </div>
+          
+              <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
+              <input id="email" formControlName="email" type="email" placeholder="Email address" pInputText class="w-full md:w-30rem mb-5" style="padding:1rem">
+              <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+                <div *ngIf="form.get('email')?.errors?.['required']">Email is required.</div>
+                <div *ngIf="form.get('email')?.errors?.['email']">Email is not valid.</div>
+              </div>
+          
+              <label for="password" class="block text-900 font-medium text-xl mb-2">Mot de passe</label>
+              <input id="password" formControlName="password" type="password" placeholder="Mot de passe" class="w-full md:w-30rem mb-5" style="padding: 1rem">
+              <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-danger">
+                <div *ngIf="form.get('password')?.errors?.['required']">Password is required.</div>
+                <div *ngIf="form.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+              </div>
+          
+              <label for="cpassword" class="block text-900 font-medium text-xl mb-2">Confirmer Mot de passe</label>
+              <input id="cpassword" type="password" formControlName="cpassword" placeholder="Confirmer Mot de passe" class="w-full md:w-30rem mb-5" style="padding: 1rem">
+              <div *ngIf="form.get('cpassword')?.invalid && form.get('cpassword')?.touched" class="text-danger">
+                <div *ngIf="form.get('cpassword')?.errors?.['required']">Confirm Password is required.</div>
+                <div *ngIf="form.errors?.['mismatch']">Passwords do not match.</div>
+              </div>
+          
+              <!-- Bouton "Save" -->
+              <button class="save-button" type="submit"  routerlink="/login" >Save</button>
+            </div>
+          </form>
+          
+     <!--   <a   type="submit"  class="save-button" routerlink="/auth/login"> </a>-->
+
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+

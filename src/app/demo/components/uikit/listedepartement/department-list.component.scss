@@ -1,0 +1,152 @@
+.department-interface {
+    padding: 20px;
+
+    .p-datatable .p-datatable-tbody > tr > td:last-child {
+      width: 150px; // Adjust the width as needed
+    }
+
+    .p-input-icon-left .p-inputtext {
+      padding-left: 4em; // Add enough padding for the icon
+    }
+
+    .p-input-icon-left .pi {
+      position: absolute;
+      margin-left: 0.5em; // Adjust this value to align the icon
+    }
+
+    .add-department-form {
+      .form-group {
+        margin-bottom: 20px;
+
+        label {
+          font-weight: bold;
+        }
+
+        input[type="text"] {
+          width: 100%;
+          padding: 8px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        .btn {
+          padding: 8px 20px;
+          margin-right: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          display: inline-block; // Make sure buttons are on the same line
+          margin-top: 10px; // Space above buttons
+        }
+
+        .btn-success {
+          background-color: #28a745;
+          color: #fff;
+          border: none;
+
+          &:hover {
+            background-color: #218838;
+          }
+        }
+
+        .btn-danger {
+          background-color: #dc3545;
+          color: #fff;
+          border: none;
+
+          &:hover {
+            background-color: #c82333;
+          }
+        }
+      }
+    }
+  }
+
+
+  ::ng-deep .custom-dialog-size {
+    width: 30% !important;
+    min-width: 200px !important;
+  }
+/* Styles réutilisables pour les formulaires */
+.form-group {
+    margin-bottom: 20px;
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .btn {
+      padding: 8px 20px;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      display: inline-block; // Make sure buttons are on the same line
+      margin-top: 10px; // Space above buttons
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background-color: #c82333;
+      }
+    }
+  }
+
+  /* Application du style au département-interface et aux dialogues personnalisés */
+  .department-interface {
+    padding: 20px;
+
+    .p-datatable .p-datatable-tbody > tr > td:last-child {
+      width: 150px; // Adjust the width as needed
+    }
+
+    .p-input-icon-left .p-inputtext {
+      padding-left: 4em; // Add enough padding for the icon
+    }
+
+    .p-input-icon-left .pi {
+      position: absolute;
+      margin-left: 0.5em; // Adjust this value to align the icon
+    }
+  }
+
+  /* Spécifique pour la taille du dialogue personnalisé */
+  ::ng-deep .custom-dialog-size {
+    width: 30% !important;
+    min-width: 200px !important;
+  }
+  
+ 
+  select {
+    width: 100%; /* Prend la largeur totale du conteneur parent */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 14px;
+  }
+  
+  /* Style pour les options de la liste déroulante */
+  option {
+    padding: 5px;
+    font-size: 14px;
+  }

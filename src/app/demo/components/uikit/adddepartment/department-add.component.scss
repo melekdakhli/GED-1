@@ -1,0 +1,60 @@
+/* Styles globaux pour centrer le formulaire */
+.department-add{
+    max-width: 400px; /* Définir une largeur maximale pour le formulaire */
+    margin: 100px auto 0; /* Augmentation de la marge supérieure pour le décaler vers le bas */
+    padding: 50px; /* Espacement autour du formulaire */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre pour un effet élévé */
+    background-color: #cccbca; /* Fond blanc pour le formulaire */
+    border-radius: 8px; /* Coins arrondis pour le formulaire */
+  }
+
+  /* Styles pour la typographie et le spacing */
+  h2 {
+    text-align: center; /* Titre centré */
+    color: #333; /* Couleur du texte */
+    margin-bottom: 30px; /* Espacement sous le titre */
+  }
+
+  .form-group {
+    margin-bottom: 20px; /* Espacement entre les champs de formulaire */
+  }
+
+  label {
+    display: block; /* S'assurer que le label prend toute la largeur */
+    margin-bottom: 10px; /* Espacement sous le label */
+    color: #666; /* Couleur des labels */
+    font-weight: bold; /* Les labels sont en gras */
+  }
+
+  input, select {
+    width: 100%; /* Les champs prennent toute la largeur disponible */
+    padding: 10px; /* Espacement interne plus généreux */
+    border: 1px solid #c9a7a5; /* Bordure plus subtile */
+    border-radius: 4px; /* Coins arrondis */
+    box-sizing: border-box; /* Bordure incluse dans la largeur */
+  }
+
+  .btn-primary {
+    width: 100%; /* Le bouton prend toute la largeur disponible */
+    padding: 10px; /* Augmentation du rembourrage */
+    border-radius: 4px; /* Coins arrondis */
+    background-color: #f65824; /* Couleur de fond plus profonde */
+    color: #fffffe; /* Texte blanc */
+    border: none; /* Aucune bordure */
+    cursor: pointer; /* Curseur en forme de pointeur */
+    margin-top: 20px; /* Espacement au-dessus du bouton */
+    font-size: 16px; /* Taille de police plus grande */
+    transition: background-color 0.3s; /* Animation de fond */
+  }
+
+  .btn-primary:hover {
+    background-color: #003d82; /* Couleur de fond plus foncée au survol */
+  }
+
+  /* Style pour les écrans plus petits */
+  @media (max-width: 600px) {
+    .department-add {
+      margin-top: 50px; /* Moins de marge sur les petits écrans */
+      padding: 20px; /* Moins de remplissage sur les petits écrans */
+    }
+  }

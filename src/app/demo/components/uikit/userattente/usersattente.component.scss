@@ -1,0 +1,140 @@
+/* Style général de la page des utilisateurs */
+.users {
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .table-container {
+      table {
+        border-collapse: collapse;
+        width: 100%;
+
+        th, td {
+          padding: 8px;
+          text-align: left;
+          border: 1px solid #ddd;
+        }
+
+        th {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+
+    /* Style pour la pagination, si nécessaire */
+    /*.pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+
+      button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #007bff;
+        color: #eee;
+        cursor: pointer;
+
+        &:hover {
+          background-color: darken(#007bff, 10%);
+        }
+      }
+
+      span {
+        margin-right: 10px;
+      }
+    }*/
+  }
+
+  /* Ajustements spécifiques pour les dialogues */
+  ::ng-deep .ui-dialog {
+    background-color: #f0f0f0; /* Couleur de fond personnalisée */
+    border-radius: 10px; /* Bord arrondi */
+    border: 2px solid #ccc; /* Bordure */
+    width: 500px; /* Redéfinition de la largeur */
+  }
+
+  /* Styles des formulaires d'ajout et d'édition */
+  .add-user-form, .edit-user-form {
+    .form-group {
+      margin-bottom: 20px;
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"], input[type="password"], input[type="email"] {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .btn {
+        padding: 8px 20px;
+        margin-right: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+
+        &.btn-success:hover {
+          background-color: #218838;
+        }
+
+        &.btn-danger {
+          background-color: #dc3545;
+
+          &:hover {
+            background-color: #c82333;
+          }
+        }
+      }
+    }
+  }
+
+  /* Suppression des styles de bordure des icônes dans la colonne d'action */
+.icone button {
+    background: none;
+    border: none; /* Assurez-vous qu'aucune bordure n'est appliquée */
+    padding: 0;
+    margin: 0 5px;
+    cursor: pointer;
+
+    &:hover {
+      background: none;
+      opacity: 0.8;
+    }
+
+    i {
+      font-size: 20px; /* Taille de l'icône ajustée */
+      margin-right: 5px; /* Marge à droite pour l'espacement */
+      border: none; /* Suppression explicite de la bordure de l'icône */
+    }
+  }
+
+  button i.fa-eye { color: #007bff; } /* Couleur pour l'icône de vue */
+  button i.fa-edit { color: #28a745; } /* Couleur pour l'icône d'édition */
+  button i.fa-trash-alt { color: #dc3545; } /* Couleur pour l'icône de suppression */
+  button i.fa-archive { color: #ffc107; } /* Couleur pour l'icône d'archivage */
+
+
+  ::ng-deep .custom-dialog-size {
+    width: 30% !important;
+    min-width: 200px !important;
+  }
+  select {
+    width: 100%; /* Prend la largeur totale du conteneur parent */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 14px;
+  }
+  
+  /* Style pour les options de la liste déroulante */
+  option {
+    padding: 5px;
+    font-size: 14px;
+  }

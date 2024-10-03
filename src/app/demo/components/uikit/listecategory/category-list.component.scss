@@ -1,0 +1,80 @@
+.category-interface {
+    .card {
+      padding: 20px;
+    }
+
+    .p-datatable .p-datatable-tbody > tr > td:last-child {
+      width: 150px; // Adjust based on your needs
+    }
+
+
+  }
+
+
+
+// Ajustements pour le dialogue
+.add-categorie-form {
+    .form-group {
+        margin-bottom: 20px;
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block; // Assurez-vous que les boutons sont sur la même ligne
+            margin-top: 10px; // Espace au-dessus des boutons
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    }
+}
+
+// Assurez-vous que les classes spécifiques à PrimeNG sont également prises en compte
+::ng-deep {
+    .p-dialog .p-dialog-content {
+        padding: 20px; // Ajustez le padding si nécessaire
+    }
+
+    .p-dialog .p-footer {
+        border-top: none; // Enlève la bordure par défaut si nécessaire
+        background-color: transparent; // Enlève le fond par défaut si nécessaire
+    }
+
+    // Autres styles PrimeNG personnalisés si nécessaire...
+}
+
+
+::ng-deep .custom-dialog-size {
+    width: 30% !important;
+    min-width: 200px !important;
+  }

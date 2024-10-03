@@ -1,0 +1,69 @@
+<div class="container">
+    <h1 class="form-heading">Ajouter un utilisateur</h1>
+    <form [formGroup]="addUserForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="row">
+        <!-- Prénom -->
+        <div class="form-group col-6">
+          <label for="firstName">Prénom *</label>
+          <input type="text" id="firstName" formControlName="firstName" class="form-control">
+        </div>
+
+        <!-- Nom de famille -->
+        <div class="form-group col-6">
+          <label for="lastName">Nom de famille *</label>
+          <input type="text" id="lastName" formControlName="lastName" class="form-control">
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Numéro de portable -->
+        <div class="form-group col-6">
+          <label for="phone">Numéro de portable *</label>
+          <input type="text" id="phone" formControlName="phone" class="form-control">
+        </div>
+
+        <!-- Email -->
+        <div class="form-group col-6">
+          <label for="email">Email *</label>
+          <input type="email" id="email" formControlName="email" class="form-control">
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Mot de passe -->
+        <div class="form-group col-6">
+          <label for="password">Mot de passe *</label>
+          <input type="password" id="password" formControlName="password" class="form-control">
+        </div>
+
+        <!-- Confirmation du mot de passe -->
+        <div class="form-group col-6">
+          <label for="confirmPassword">Confirmer le mot de passe *</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control">
+        </div>
+      </div>
+
+      <!-- Rôles -->
+      <div class="form-group">
+        <label>Rôles *</label>
+        <div class="form-check">
+          <input type="radio" id="userRole" formControlName="role" value="Utilisateur" class="form-check-input">
+          <label for="userRole" class="form-check-label">Utilisateur</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="groupLeaderRole" formControlName="role" value="Chef de groupe" class="form-check-input">
+          <label for="groupLeaderRole" class="form-check-label">Chef de groupe</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="adminRole" formControlName="role" value="Administrateur" class="form-check-input">
+          <label for="adminRole" class="form-check-label">Administrateur</label>
+        </div>
+      </div>
+
+      <!-- Boutons -->
+      <div class="form-group action-buttons">
+        <button type="submit" class="btn btn-success">Enregistrer</button>
+        <button type="button" class="btn btn-danger">Annuler</button>
+      </div>
+    </form>
+  </div>

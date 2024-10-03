@@ -1,0 +1,35 @@
+<div class="layout-topbar">
+    <a class="layout-topbar-logo" routerLink="">
+        <img src="assets/layout/images/asm.jpg" alt="Image" height="150" class="mb-5">
+        <span>ASM</span>
+    </a>
+
+    <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+        <i class="pi pi-bars"></i>
+    </button>
+
+    <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+        <i class="pi pi-ellipsis-v"></i>
+    </button>
+
+    <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+        <button class="p-link layout-topbar-button">
+       
+        {{user.user_fname}}
+            <span>Calendar</span>
+        </button>
+        <button class="p-link layout-topbar-button" [routerLink]="'/changepassword'">
+            <i class="pi pi-user"></i>
+            <span>Profil </span>
+        </button>
+
+            <!-- Ajout du bouton de déconnexion -->
+            <button class="p-link layout-topbar-button" [routerLink]="'/auth/login'" (click)="logout()">
+                <i class="pi pi-power-off"></i> <!-- Utilisation de l'icône de déconnexion -->
+                <span>Logout</span>
+            </button>
+
+
+    </div>
+   
+</div>

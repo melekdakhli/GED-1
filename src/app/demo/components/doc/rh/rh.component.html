@@ -1,0 +1,194 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="card px-6 py-6">
+            <!-- En-tête de la table avec les boutons -->
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <div *ngFor="let permission of permissions" >
+                            <div *ngIf="permission.role_id == user.role_id">
+                        <button *ngIf="permission.create==1" pButton pRipple label="Importer Document " icon="pi pi-upload" class="p-button-help mr-2" (click)="openImportDialog()"></button>
+                   </div></div> </div>
+                </ng-template>
+            </p-toolbar>
+            <div class="card">
+                <h5>Filter Menu</h5>
+                <p-table #dt1 [value]="documents" dataKey="id" [rows]="10" [rowHover]="true" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['name','categorie','created_at','dateexpiration','updated_at','motcle']" responsiveLayout="scroll">
+                    <ng-template pTemplate="caption">
+                        <div class="flex justify-content-between flex-column sm:flex-row" class="form-group">
+                            <span class="p-input-icon-left mb-2">
+                                <i class="pi pi-search"></i>
+                                 <input pInputText type="text" #filter [(ngModel)]="searchText" (input)="searchDocumentsWithElasticsearch()" placeholder="Search Keyword" class="w-full"/> 
+                                <!-- <div *ngIf="searchResults.length > 0"> -->
+                                    <!-- <option *ngFor="let result of searchResults" [value]="result">{{ result.name }}</option> -->
+                                   
+
+
+                            
+                                <!-- </div> -->
+                            </span>
+                            <p-dropdown 
+                            [options]="searchResults"
+                           [editable]="true"
+                            [(ngModel)]="selectedOption"
+                             optionLabel="name"
+                                optionValue="name"
+[filter]="true"
+[showClear]="true"
+placeholder="Select an option"
+(onChange)="onGlobalFilter(dt1, $event)"
+(onFilter)="searchDocumentsWithElasticsearch()">
+</p-dropdown>
+                        </div>
+                    </ng-template>
+                 
+                    <ng-template pTemplate="header" >
+                        <tr>
+                            <th style="min-width: 12rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Nom
+                                    <p-columnFilter type="text" field="name" display="menu" placeholder="Search by name"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="min-width: 12rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Catégorie
+                                    <p-columnFilter type="text" field="categorie" display="menu" placeholder="Search by category"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="min-width: 12rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    taille
+                                    <p-columnFilter type="text" field="taille" display="menu" placeholder="Search by size"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="min-width: 12rem">
+                                <div class="flex justify-content-between align-items-center">
+                                   mot clé
+                                    <p-columnFilter type="text" field="motcle" display="menu" placeholder="Search by keyword"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="min-width: 10rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    crée par
+                                    <p-columnFilter type="date" field="created_at" display="menu" placeholder="Search by creation date"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th style="min-width: 10rem">
+                                <div class="flex justify-content-between align-items-center">
+                                    Date  de creation 
+                                    <p-columnFilter type="date" field="dateexpiration" display="menu" placeholder="Search by expiration date"></p-columnFilter>
+                                </div>
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-document>
+                        <tr>
+                            <td>{{document.name}}</td>
+                            <td>{{document.categorie}}</td>
+                            <td>{{document.taille}}</td>
+                            <td>{{document.motcle}}</td>
+                            <div *ngFor="let admin of admins" >
+                                <td *ngIf="admin.id==document.user_id">{{admin.fname}} {{admin.lname}}</td></div> 
+                            <td>{{document.creationDate | date: 'medium'}}</td>
+                             
+                      
+                            <td>
+                                <div *ngFor="let permission of permissions" >
+                                  <div *ngIf="permission.role_id == user.role_id">
+                                    <button *ngIf="permission.modifier==1" pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="showEditDialog(document)"></button>
+                                    <button  *ngIf="permission.delete==1" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning mr-2" (click)="deleteDocument(document)"></button>
+                                    <button *ngIf="permission.show==1" pButton pRipple icon="pi pi-eye" class="p-button-rounded p-button-info mr-2" (click)="viewDocumentDetails(document)"></button>
+                                </div></div>
+                              </td>
+                              
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="7">No documents found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <!-- Dialogues pour modifier document -->
+        <p-dialog header="Modifier le document"  [(visible)]="displayEditDialog" *ngIf="displayEditDialog" [style]="{width: '50vw'}" [focusOnShow]="false">
+            <form [formGroup]="DocumentForm">
+                <div class="formgrid grid">
+                    <div class="field col">
+                        <label for="name">Nom</label>
+                        <input id="name" type="text" pInputText formControlName="name" required autofocus />
+                    </div><br><br>
+                    <div class="field col">
+                        <label for="taille">taille:</label>
+                        <input id="taille" type="text" pInputText formControlName="taille"required autofocus />
+                    </div>
+                    <div class="field col">
+                        <label for="motcle">mot clé:</label>
+                        <input id="motcle" type="text" pInputText formControlName="motcle" />
+                    </div>
+                    <div class="field col">
+                        <label for="creationDate">Date de creation:</label>
+                        <input id="creationDate" type="date" pInputText formControlName="creationDate" required autofocus />
+                    </div>
+                </div>
+                <p-footer>
+                    <button type="button" pButton label="Annuler" icon="pi pi-times" class="p-button-text" (click)="displayEditDialog = false"></button>
+                    <button type="button" pButton label="Sauvegarder" icon="pi pi-check" class="p-button-text" (click)="saveDocument()"></button>
+                </p-footer>
+            </form>
+        </p-dialog>
+        <!-- Dialogues pour detaille document -->
+        <p-dialog header="Détails du document" [(visible)]="viewDocumentDialog" *ngIf="viewDocumentDialog" [modal]="true" [style]="{width: '100vw', height:'100vh'}" [focusOnShow]="true">
+            <div class="iframe-container">
+                <iframe *ngIf="previewDocumentUrl" [src]="previewDocumentUrl" class="full-size-iframe"></iframe>
+            </div>
+            <p-footer><div *ngFor="let permission of permissions" >
+                <div *ngIf="permission.role_id == user.role_id">
+                  <div *ngIf="permission.telech==1">
+                <button type="button" pButton label="Télécharger" icon="pi pi-download" (click)="downloadDocument(selectedDocument)"></button></div></div></div>
+                <button type="button" pButton label="Fermer" class="p-button-text" (click)="viewDocumentDialog = false"></button>
+            </p-footer>
+        </p-dialog>
+        <div *ngFor="let permission of permissions" >
+            <div *ngIf="permission.role_id === user.role_id"> 
+        <!-- Dialogues pour importer document -->
+        <p-dialog header="Sélectionner un document" [(visible)]="importDocumentDialog" modal="true" [style]="{width: '450px'}" class="import-dialog">
+            <form [formGroup]="newDocumentForm">
+                <div class="form-group">
+                    <label for="importFile">Document à importer:</label>
+                    <p-fileUpload mode="basic" name="name" accept=".pdf,.docx,.txt,.png,.jpg" [maxFileSize]="1000000000" chooseLabel="Choisir un fichier" (onSelect)="onFileSelect($event)"></p-fileUpload>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nom:</label>
+                    <input id="name" type="text" formControlName="name" />
+                </div>
+                <div class="form-group">
+                    <label for="taille">taille:</label>
+                    <input id="taille" type="text" formControlName="taille" />
+                </div>
+                <div class="form-group">
+                    <label for="motcle">mot clé:</label>
+                    <input id="motcle" type="text" formControlName="motcle" />
+                </div>
+                <div class="form-group">
+                    <label for="categorieSelect">Catégorie:</label>
+                    <select formControlName="categorie">
+                        <option *ngFor="let categorie of doc1" [ngValue]="categorie.id">{{ categorie.nom }}</option>
+                    </select>
+                </div>
+                <div class="field col">
+                    <label for="creationDate">Date de creation:</label>
+                    <input id="creationDate" type="date" pInputText formControlName="creationDate" required autofocus />
+                </div>
+                <p-footer>
+                       <button type="button" pButton label="Enregistrer" class="btn btn-success" (click)="saveImportedDocument()"></button>
+                    <br>
+                     <button type="button" pButton label="Annuler" class="btn btn-danger" (click)="importDocumentDialog = false"></button>
+                </p-footer>
+            </form>
+        </p-dialog></div></div>
+    </div>
+</div>

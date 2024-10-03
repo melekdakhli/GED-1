@@ -1,0 +1,58 @@
+{
+	"data": [
+		{
+			"id": "1000",
+			"name": "Bamboo Watch",
+			"category": "Accessories",
+			"dateajout": "2020-09-13",
+			"dateexpiration": "2021-09-13",
+			"datemodification": "2020-09-13",
+			"creerpar": "David James"
+		},
+		{
+			"id": "1001",
+			"name": "Black Watch",
+			"category": "Accessories",
+			"dateajout": "2020-05-14",
+			"dateexpiration": "2021-05-14",
+			"datemodification": "2020-05-14",
+			"creerpar": "Maisha Jefferson"
+		},
+		{
+			"id": "1002",
+			"name": "Blue Band",
+			"category": "Fitness",
+			"dateajout": "2020-07-05",
+			"dateexpiration": "2021-07-05",
+			"datemodification": "2020-07-05",
+			"creerpar": "Stacey Leja"
+		},
+		{
+			"id": "1003",
+			"name": "Blue T-Shirt",
+			"category": "Clothing",
+			"dateajout": "2020-09-13",
+			"dateexpiration": "2021-09-13",
+			"datemodification": "2020-09-13",
+			"creerpar": "Claire Morrow"
+		},
+		{
+			"id": "1004",
+			"name": "Bracelet",
+			"category": "Accessories",
+			"dateajout": "2020-09-05",
+			"dateexpiration": "2021-09-05",
+			"datemodification": "2020-09-05",
+			"creerpar": "Mayumi Misaki"
+		},
+		{
+			"id": "1005",
+			"name": "Brown Purse",
+			"category": "Accessories",
+			"dateajout": "2020-01-25",
+			"dateexpiration": "2021-01-25",
+			"datemodification": "2020-01-25",
+			"creerpar": "Isabel Sinclair"
+		}
+	]
+}

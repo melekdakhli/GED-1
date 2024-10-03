@@ -1,0 +1,8 @@
+th, td {
+    border-right: 1px solid #ccc; /* Ajoute une bordure à droite de chaque cellule */
+}
+
+th:last-child, td:last-child {
+    border-right: none; /* Supprime la bordure à droite de la dernière cellule de chaque ligne */
+}
+

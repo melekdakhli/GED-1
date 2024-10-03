@@ -1,0 +1,15 @@
+
+<div class="grid">
+    
+    <iframe id="powerBIFrame"   title="Mini_Projet_Visualisation" width="1224" height="1060" src="https://app.powerbi.com/view?r=eyJrIjoiNTY5MzFlOTYtNTcwYy00NmMwLWFhNTctNjgzYmZmYTEwMzY0IiwidCI6ImRiZDY2NjRkLTRlYjktNDZlYi05OWQ4LTVjNDNiYTE1M2M2MSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
+  
+  <script>
+    function refreshIframe() {
+      var iframe = document.getElementById('powerBIFrame');
+      iframe.src = iframe.src;  
+    }
+  
+    // Rafraîchir automatiquement toutes les 5 minutes
+    setInterval(refreshIframe,600); //  ynjem y3ml rerche kol  0.6 seconde 
+    
+  </script></div>
