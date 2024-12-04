@@ -1,0 +1,4 @@
+node_modules
+npm-deug.log
+.git
+.gitignore

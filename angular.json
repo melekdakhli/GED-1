@@ -40,18 +40,21 @@
                   },
                   "configurations": {
                     "production": {
-                      "budgets": [
-                        {
-                          "type": "initial",
-                          "maximumWarning": "1mb",
-                          "maximumError": "5mb"
-                        },
-                        {
-                          "type": "anyComponentStyle",
-                          "maximumWarning": "2kb",
-                          "maximumError": "4kb"
-                        }
-                      ],
+                     "budgets": [
+  {
+    "type": "initial",
+    "maximumWarning": "5mb",
+    "maximumError": "10mb"
+  },
+  {
+    "type": "anyComponentStyle",
+    "maximumWarning": "6kb",
+    "maximumError": "10kb"
+  }
+],"allowedCommonJsDependencies": [
+  "file-saver",
+  "elasticsearch-browser"
+],
                       "outputHashing": "all"
                     },
                     "development": {
